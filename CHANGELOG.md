@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning].
 
 ### Fixed
 
+- Preserve the Bluetooth MAC from the discovery card when adding an app-account device and the advertisement UUID cannot be decoded. Prefer an exact UUID match and never use the discovery fallback when a decoded UUID conflicts.
+- Use the latest available advertisement when checking a discovered device, and distinguish a missing Bluetooth MAC from an invalid address in the confirmation form.
+
 - Restored the BLE library exports after integration lifecycle code had been placed in the internal library initializer.
 - Reload the integration when credentials change and bound device shutdown during unload so an unreachable BLE device does not block removal indefinitely.
 

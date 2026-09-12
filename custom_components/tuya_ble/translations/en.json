@@ -14,7 +14,8 @@
       "invalid_address": "Enter a valid Bluetooth MAC address, for example AA:BB:CC:DD:EE:FF.",
       "missing_manual_credentials": "UUID, local key, device ID, category and product ID are required. If Tuya omitted a value, enter it manually before saving.",
       "wrong_device": "Keep the device ID of the selected or existing device. Add a separate integration entry for a different device.",
-      "bluetooth_device_mismatch": "The selected Bluetooth device advertises a different UUID. Choose the correct device or MAC address."
+      "bluetooth_device_mismatch": "The selected Bluetooth device advertises a different UUID. Choose the correct device or MAC address.",
+      "missing_address": "No Bluetooth MAC address is available. Select a nearby Bluetooth device or enter its MAC address."
     },
     "flow_title": "{name}",
     "step": {
@@ -80,7 +81,7 @@
       },
       "device_credentials": {
         "title": "Confirm local BLE credentials",
-        "description": "These values were retrieved from your app account. Check the Bluetooth MAC address and complete any missing fields. If no MAC was found, choose a nearby Bluetooth device or enter its MAC. The local key is required and will be saved for local BLE communication.",
+        "description": "These values were retrieved from your app account. The Bluetooth MAC is filled from a matching advertisement, a Bluetooth MAC returned by Tuya, or the discovery card where you selected Add. Confirm that the selected app device is the same physical device. If no MAC is available, choose a nearby Bluetooth device or enter its MAC. Complete any missing required fields before saving.",
         "data": {
           "address": "MAC address",
           "device_name": "Device name",
@@ -94,7 +95,7 @@
           "bluetooth_device": "Nearby Bluetooth device"
         },
         "data_description": {
-          "address": "Bluetooth MAC address in AA:BB:CC:DD:EE:FF format",
+          "address": "Bluetooth MAC address. When setup starts from a discovered device, its address is suggested if no conflicting UUID is known. Confirm that it belongs to the app device you selected.",
           "device_name": "Optional friendly name. Leave blank to use the default name.",
           "uuid": "Tuya device UUID",
           "local_key": "Encryption key used for BLE communication",
@@ -323,7 +324,8 @@
       "invalid_address": "Enter a valid Bluetooth MAC address, for example AA:BB:CC:DD:EE:FF.",
       "missing_manual_credentials": "UUID, local key, device ID, category and product ID are required. If Tuya omitted a value, enter it manually before saving.",
       "wrong_device": "Keep the device ID of the selected or existing device. Add a separate integration entry for a different device.",
-      "bluetooth_device_mismatch": "The selected Bluetooth device advertises a different UUID. Choose the correct device or MAC address."
+      "bluetooth_device_mismatch": "The selected Bluetooth device advertises a different UUID. Choose the correct device or MAC address.",
+      "missing_address": "No Bluetooth MAC address is available. Select a nearby Bluetooth device or enter its MAC address."
     },
     "step": {
       "init": {

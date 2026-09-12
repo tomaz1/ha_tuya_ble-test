@@ -138,3 +138,86 @@ async def test_failed_platform_unload_keeps_runtime(lifecycle, ha, entry):
     ha.hass.data["tuya_ble"] = {entry.entry_id: object()}
     assert not await lifecycle.async_unload_entry(ha.hass, entry)
     assert entry.entry_id in ha.hass.data["tuya_ble"]
+
+
+@pytest.mark.asyncio
+async def test_discovery_add_prefills_mac_without_decodable_uuid(flow, credentials):
+    info = SimpleNamespace(
+        address=credentials["address"],
+        name="Discovered valve",
+        service_uuids=[],
+        manufacturer_data={},
+        service_data={"0000a201-0000-1000-8000-00805f9b34fb": b"\x01unknown"},
+    )
+    await flow.async_step_bluetooth(info)
+    flow._account_devices = {credentials["device_id"]: dict(credentials, address="")}
+    result = await flow.async_step_account_device(
+        {"device_id": credentials["device_id"]}
+    )
+    # Validate the form defaults exactly as a Submit without edits would do.
+    submitted = result["data_schema"]({})
+    assert submitted["address"] == credentials["address"]
+    result = await flow.async_step_device_credentials(submitted)
+    assert result["type"] == "create_entry"
+    assert result["options"]["address"] == credentials["address"]
+
+
+@pytest.mark.asyncio
+async def test_discovery_fallback_does_not_accept_conflicting_uuid(flow, credentials):
+    await flow.async_step_bluetooth(advertisement("different-uuid01"))
+    flow._account_devices = {credentials["device_id"]: dict(credentials, address="")}
+    result = await flow.async_step_account_device(
+        {"device_id": credentials["device_id"]}
+    )
+    submitted = result["data_schema"]({})
+    assert submitted["address"] == ""
+    result = await flow.async_step_device_credentials(submitted)
+    assert result["errors"]["base"] == "missing_address"
+
+
+@pytest.mark.asyncio
+async def test_exact_uuid_match_wins_over_discovery_card(flow, ha, credentials):
+    await flow.async_step_bluetooth(advertisement("different-uuid01"))
+    matching = "11:22:33:44:55:66"
+    ha.inventory.append(advertisement(credentials["uuid"], matching))
+    flow._account_devices = {credentials["device_id"]: dict(credentials, address="")}
+    await flow.async_step_account_device({"device_id": credentials["device_id"]})
+    assert flow._selected["address"] == matching
+
+
+@pytest.mark.asyncio
+async def test_current_advertisement_wins_over_stale_discovery(flow, ha, credentials):
+    stale = advertisement(credentials["uuid"])
+    stale.manufacturer_data = {}
+    await flow.async_step_bluetooth(stale)
+    ha.inventory.append(advertisement("different-uuid01"))
+    flow._account_devices = {credentials["device_id"]: dict(credentials, address="")}
+    await flow.async_step_account_device({"device_id": credentials["device_id"]})
+    assert flow._selected["address"] == ""
+
+
+@pytest.mark.asyncio
+async def test_general_add_does_not_guess_only_nearby_device(flow, ha, credentials):
+    info = advertisement(credentials["uuid"])
+    info.manufacturer_data = {}
+    ha.inventory.append(info)
+    flow._account_devices = {credentials["device_id"]: dict(credentials, address="")}
+    result = await flow.async_step_account_device(
+        {"device_id": credentials["device_id"]}
+    )
+    submitted = result["data_schema"]({})
+    assert submitted["address"] == ""
+    submitted["bluetooth_device"] = credentials["address"]
+    result = await flow.async_step_device_credentials(submitted)
+    assert result["type"] == "create_entry"
+
+
+@pytest.mark.asyncio
+async def test_sdk_bluetooth_mac_is_preserved(flow, credentials):
+    other = "11:22:33:44:55:66"
+    info = advertisement(credentials["uuid"])
+    info.manufacturer_data = {}
+    await flow.async_step_bluetooth(info)
+    flow._account_devices = {credentials["device_id"]: dict(credentials, address=other)}
+    await flow.async_step_account_device({"device_id": credentials["device_id"]})
+    assert flow._selected["address"] == other

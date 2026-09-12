@@ -189,6 +189,21 @@ class _SetupFlow:
                 matches = self._matching_addresses(self._selected["uuid"])
                 if len(matches) == 1:
                     self._selected["address"] = matches[0]
+                elif not self._selected["address"] and self._discovery_info:
+                    # Add on a Bluetooth discovery card already identifies a MAC.
+                    # Some advertisement formats cannot expose a UUID, so retain
+                    # that address for confirmation unless a decoded UUID disagrees.
+                    discovery = self._discovered().get(
+                        normalize_address(self._discovery_info.address)
+                    )
+                    if discovery:
+                        uuid = advertised_uuid(
+                            discovery.service_data, discovery.manufacturer_data
+                        )
+                        if uuid is None or uuid == self._selected["uuid"]:
+                            self._selected["address"] = normalize_address(
+                                discovery.address
+                            )
             return await self.async_step_device_credentials()
         if not choices and not errors:
             errors["base"] = (
@@ -213,8 +228,8 @@ class _SetupFlow:
             if SERVICE_UUID in info.service_data or SERVICE_UUID in info.service_uuids
         }
         if self._discovery_info:
-            devices[normalize_address(self._discovery_info.address)] = (
-                self._discovery_info
+            devices.setdefault(
+                normalize_address(self._discovery_info.address), self._discovery_info
             )
         devices.pop("", None)
         return devices
@@ -273,6 +288,8 @@ class _SetupFlow:
     def _validate(self, values: dict[str, Any]) -> dict[str, str]:
         if not credentials_complete(values):
             return {"base": "missing_manual_credentials"}
+        if not str(values.get("address") or "").strip():
+            return {"base": "missing_address"}
         if not normalize_address(values.get("address")):
             return {"base": "invalid_address"}
         stored_id = self._stored().get("device_id")
