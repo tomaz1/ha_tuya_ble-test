@@ -14,9 +14,11 @@ Added support for new **User Code login**, which retrieves a device's local key,
 ![device-selection](images/device_selection.png)
 
 You can see all data from device (also "local_key") thanks to [tuya-local-key](https://github.com/vineetchoudhary/tuya-local-key):
+
 ![device-confirmation](images/device_confirmation.png)
 
 Or manually:
+
 ![device-manual](images/device_manual.png)
 ![device-manual-confirm](images/device_manual_confirm.png)
 
