@@ -5,12 +5,19 @@
 ![device-controls](images/llflaywg-controls.png)
 ![device-diagnostic](images/llflaywg-diagnostic.png)
 
+<hr>
+
 Added support for new **User Code login**, which retrieves a device's local key, and/or **manual device setup**:
+
 ![device-adding](images/device_adding.png)
 ![qr-login](images/qr_login.png)
 ![device-selection](images/device_selection.png)
 You can see all data from device (also "local_key") thanks to [tuya-local-key](https://github.com/vineetchoudhary/tuya-local-key):
 ![device-confirmation](images/device_confirmation.png)
+
+Or manually:
+![device-manual](images/device_manual.png)
+![device-manual-confirm](images/device_manual_confirm.png)
 
 # Home Assistant support for Tuya BLE devices
 
@@ -52,7 +59,7 @@ Place the `custom_components` folder in your configuration directory (or add its
 
 ## Device setup methods
 
-The integration supports two ways to add a Tuya BLE device. A Tuya developer account, developer project, and IoT Core subscription are no longer required.
+The integration supports two ways to add a Tuya BLE device. A Tuya developer account, developer project, and IoT Core / Developer subscription are **no longer required**!
 
 ### User Code setup
 
@@ -66,7 +73,7 @@ Both methods store the device credentials in the Home Assistant config entry and
 
 ## Usage
 
-Version 0.2.2 replaces Tuya Developer Platform login with your Smart Life or Tuya Smart app account. A separate developer account or IoT Core subscription is no longer required.
+Version 0.2.2 replaces Tuya Developer Platform login with your Smart Life or Tuya Smart app account. A separate developer account or IoT Core / Developer subscription is no longer required.
 
 1. Add the **Tuya BLE** integration and keep **User Code** selected.
 2. In Smart Life or Tuya Smart, open **Me → ⚙️ Settings → Account and Security → User Code**, and enter that code in Home Assistant. See [Obtaining User Code for sign-in](https://www.home-assistant.io/integrations/tuya/#obtaining-user-code-for-sign-in).
