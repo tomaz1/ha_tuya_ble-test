@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning].
 
 ### Changed
 
+- Removed the redundant strings.json file. Custom integration translations are maintained in translations/en.json, with explicit English text as required by the [Home Assistant custom integration localization documentation](https://developers.home-assistant.io/docs/internationalization/custom_integration/).
+
 - Made User Code the default setup method and placed it above the existing manual section.
 - Removed the Tuya Developer Platform login section and the old developer-account SDK. The maintainer's developer-account trial/subscription expired; using the app account avoids requiring a separate developer project and renewing its IoT service subscription.
 - Kept manual setup and local BLE operation. Only device credentials are saved; QR and account access/refresh tokens remain in memory during setup.
