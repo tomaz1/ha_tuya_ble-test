@@ -29,7 +29,6 @@ and this project adheres to [Semantic Versioning].
 ### Fixed
 
 - Restore the Open 100% label for the llflaywg radiator valve mode, using the original repository translation. Scope the valve_mode translation key to that product while preserving the dry HVAC value and DP 1 value 3 for existing automations and device commands.
-
 - Replace the remaining deprecated CONCENTRATION_PARTS_PER_MILLION import and usage in the CO2 alarm threshold number entity with UnitOfRatio.PARTS_PER_MILLION.
 - Align English translations with the actual entity keys, including the binary battery sensor, lid display button, temperature calibration and battery percentage. Add missing reminder, lock alarm, volume, display, motor thrust and valve/window state labels without changing entity identifiers or datapoint mappings.
 - Replace all unresolved translation references in strings.json and translations/en.json with explicit English labels and states, including Battery, Signal strength, Brightness, Switch, Charging, Not charging, Low, Normal, Carbon dioxide, Humidity, Moisture and Temperature.
