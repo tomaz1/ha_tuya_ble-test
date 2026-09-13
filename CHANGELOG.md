@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning].
 
 ### Fixed
 
+- Restore the Open 100% label for the llflaywg radiator valve mode, using the original repository translation. Scope the valve_mode translation key to that product while preserving the dry HVAC value and DP 1 value 3 for existing automations and device commands.
+
 - Replace the remaining deprecated CONCENTRATION_PARTS_PER_MILLION import and usage in the CO2 alarm threshold number entity with UnitOfRatio.PARTS_PER_MILLION.
 - Align English translations with the actual entity keys, including the binary battery sensor, lid display button, temperature calibration and battery percentage. Add missing reminder, lock alarm, volume, display, motor thrust and valve/window state labels without changing entity identifiers or datapoint mappings.
 - Replace all unresolved translation references in strings.json and translations/en.json with explicit English labels and states, including Battery, Signal strength, Brightness, Switch, Charging, Not charging, Low, Normal, Carbon dioxide, Humidity, Moisture and Temperature.
@@ -174,3 +176,5 @@ and this project adheres to [Semantic Versioning].
 - [briis/ha_tuya_ble English translations](https://github.com/briis/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json), [jpmreis/ha_tuya_ble English translations](https://github.com/jpmreis/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json) and [markusg1234/ha_tuya_ble English translations](https://github.com/markusg1234/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json): compared entity labels and states with their corresponding strings.json files on 2026-09-13. All three use Battery for both the percentage sensor and the binary battery condition.
 - [Home Assistant binary sensor device classes](https://www.home-assistant.io/integrations/binary_sensor/#device-class): battery on means low and off means normal; battery_charging on means charging and off means not charging.
 - [Home Assistant backend localization](https://developers.home-assistant.io/docs/internationalization/core/): translation references in source strings and entity/state translation structure. Display labels were also checked against this repository's actual entity keys and option values.
+
+- [Original tomaz1/ha_tuya_ble English climate translation](https://github.com/tomaz1/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json): restored the valve_mode state label dry → Open 100% for the llflaywg radiator valve.

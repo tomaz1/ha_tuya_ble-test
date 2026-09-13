@@ -375,6 +375,16 @@
       "program": {
         "name": "Program: position[/time];..."
       }
+    },
+    "climate": {
+      "valve_mode": {
+        "state": {
+          "auto": "Auto",
+          "heat": "Heat",
+          "off": "Off",
+          "dry": "Open 100%"
+        }
+      }
     }
   },
   "options": {
