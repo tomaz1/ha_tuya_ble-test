@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning].
 ### Changed
 
 - Removed the redundant strings.json file. Custom integration translations are maintained in translations/en.json, with explicit English text as required by the [Home Assistant custom integration localization documentation](https://developers.home-assistant.io/docs/internationalization/custom_integration/).
-
 - Made User Code the default setup method and placed it above the existing manual section.
 - Removed the Tuya Developer Platform login section and the old developer-account SDK. The maintainer's developer-account trial/subscription expired; using the app account avoids requiring a separate developer project and renewing its IoT service subscription.
 - Kept manual setup and local BLE operation. Only device credentials are saved; QR and account access/refresh tokens remain in memory during setup.
@@ -29,13 +28,11 @@ and this project adheres to [Semantic Versioning].
 
 ### Fixed
 
+- Replace the remaining deprecated CONCENTRATION_PARTS_PER_MILLION import and usage in the CO2 alarm threshold number entity with UnitOfRatio.PARTS_PER_MILLION.
 - Align English translations with the actual entity keys, including the binary battery sensor, lid display button, temperature calibration and battery percentage. Add missing reminder, lock alarm, volume, display, motor thrust and valve/window state labels without changing entity identifiers or datapoint mappings.
-
 - Replace all unresolved translation references in strings.json and translations/en.json with explicit English labels and states, including Battery, Signal strength, Brightness, Switch, Charging, Not charging, Low, Normal, Carbon dioxide, Humidity, Moisture and Temperature.
-
 - Preserve the Bluetooth MAC from the discovery card when adding an app-account device and the advertisement UUID cannot be decoded. Prefer an exact UUID match and never use the discovery fallback when a decoded UUID conflicts.
 - Use the latest available advertisement when checking a discovered device, and distinguish a missing Bluetooth MAC from an invalid address in the confirmation form.
-
 - Restored the BLE library exports after integration lifecycle code had been placed in the internal library initializer.
 - Reload the integration when credentials change and bound device shutdown during unload so an unreachable BLE device does not block removal indefinitely.
 
