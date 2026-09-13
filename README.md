@@ -1,9 +1,16 @@
 
-#  **It is finaly working!** (llflaywg)
+#  **Thermostatic Radiator Valve** (llflaywg)
 
-![device-info](<https://github.com/tomaz1/ha_tuya_ble/blob/main/images/llflaywg-device-info.png?raw=true>)
-![device-controls](<https://github.com/tomaz1/ha_tuya_ble/blob/main/images/llflaywg-controls.png?raw=true>)
-![device-diagnostic](<https://github.com/tomaz1/ha_tuya_ble/blob/main/images/llflaywg-diagnostic.png?raw=true>)
+![device-info](images/llflaywg-device-info.png)
+![device-controls](images/llflaywg-controls.png)
+![device-diagnostic](images/llflaywg-diagnostic.png)
+
+Added support for new **User Code login**, which retrieves a device's local key, and/or **manual device setup**:
+![device-adding](images/device_adding.png)
+![qr-login](images/qr_login.png)
+![device-selection](images/device_selection.png)
+You can see all data from device (also "local_key") thanks to [tuya-local-key](https://github.com/vineetchoudhary/tuya-local-key):
+![device-confirmation](images/device_confirmation.png)
 
 # Home Assistant support for Tuya BLE devices
 
@@ -21,7 +28,7 @@ Added Thermostatic Radiator Valve product_id: 'llflaywg' (Category 'wkf')
 
 [Radiator Valve was bought in Bauhaus-Slovenia]
 
-![Radiator Valve](<https://github.com/tomaz1/ha_tuya_ble/blob/main/images/12-crnoozadje.png?raw=true>)
+![Radiator Valve](images/12-crnoozadje.png)
   
 It is not so simple to add **'llflaywg'**. We need to find all DPs which device uses. Good resources, what helped me:
   
@@ -32,6 +39,7 @@ It is not so simple to add **'llflaywg'**. We need to find all DPs which device 
   Then: Smart Home Basic Service -> Smart Home Device Control-> Get Device Specification Attribute (last one will show "dp_id"s). [One in the middle with the same name, will not show DPs]
 * or we could guess what DPs are via tuya-uncover and changing settings on phone app and observing which DP's value change and to what it is changed: 
         https://github.com/blakadder/tuya-uncover?tab=readme-ov-file
+* NEW: Use tool [ltchiptool](https://github.com/libretiny-eu/ltchiptool/releases) as descused [here](https://github.com/ha-tuya-ble/ha_tuya_ble/issues/56)
         
  \* better solution is first line, because we also get descriptions for DPs!
 __________________________________________
@@ -41,6 +49,20 @@ __________________________________________
 Place the `custom_components` folder in your configuration directory (or add its contents to an existing `custom_components` folder). Alternatively install via [HACS](https://hacs.xyz/).
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=tomaz1&repository=ha_tuya_ble&category=integration)
+
+## Device setup methods
+
+The integration supports two ways to add a Tuya BLE device. A Tuya developer account, developer project, and IoT Core subscription are no longer required.
+
+### User Code setup
+
+Sign in with a User Code from the Smart Life or Tuya Smart app. Home Assistant displays a QR code that you scan in the app to authorize the login. After authorization, select the device from your app account and confirm its retrieved local credentials. This is the recommended method when the device is already paired in the app and Tuya provides its BLE information.
+
+### Manual setup
+
+Add a device without signing in to a Tuya account by entering its device details and local key directly in Home Assistant. This is useful when you already have the local credentials or when the device cannot be retrieved through User Code setup.
+
+Both methods store the device credentials in the Home Assistant config entry and use them locally over Bluetooth. Account tokens are used only during User Code setup and are not saved.
 
 ## Usage
 
