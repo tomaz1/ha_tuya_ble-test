@@ -300,6 +300,13 @@
           "weak": "Weak"
         }
       },
+      "child_lock_state": {
+        "name": "Child lock state",
+        "state": {
+          "disabled": "Disabled",
+          "enabled": "Enabled"
+        }
+      },
       "window_state": {
         "name": "Window state",
         "state": {

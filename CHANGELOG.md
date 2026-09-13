@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning].
 
 ### Added
 
+- Added a read-only Child lock state diagnostic sensor for the llflaywg radiator valve, using DP 12 shared with the existing configuration switch.
 - Added User Code sign-in through the official Tuya device-sharing SDK, followed by a QR code scanned and confirmed in Smart Life or Tuya Smart.
 - Added account device selection and retrieval of local key, UUID, device ID, category, product ID and optional device metadata.
 - Added Bluetooth UUID matching to find the device address, with nearby-device selection and manual completion when Tuya does not provide all required BLE information.
