@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning].
 
 ### Fixed
 
+- Align English translations with the actual entity keys, including the binary battery sensor, lid display button, temperature calibration and battery percentage. Add missing reminder, lock alarm, volume, display, motor thrust and valve/window state labels without changing entity identifiers or datapoint mappings.
+
+- Replace all unresolved translation references in strings.json and translations/en.json with explicit English labels and states, including Battery, Signal strength, Brightness, Switch, Charging, Not charging, Low, Normal, Carbon dioxide, Humidity, Moisture and Temperature.
+
 - Preserve the Bluetooth MAC from the discovery card when adding an app-account device and the advertisement UUID cannot be decoded. Prefer an exact UUID match and never use the discovery fallback when a decoded UUID conflicts.
 - Use the latest available advertisement when checking a discovered device, and distinguish a missing Bluetooth MAC from an invalid address in the confirmation form.
 
@@ -165,3 +169,9 @@ and this project adheres to [Semantic Versioning].
 ### User-facing instructions
 
 - [Official Home Assistant Tuya documentation — Obtaining User Code for sign-in](https://www.home-assistant.io/integrations/tuya/#obtaining-user-code-for-sign-in): source for the app navigation instructions shown below the User Code field: **Me → Settings → Account and Security → User Code**.
+
+### Additional translation review sources
+
+- [briis/ha_tuya_ble English translations](https://github.com/briis/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json), [jpmreis/ha_tuya_ble English translations](https://github.com/jpmreis/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json) and [markusg1234/ha_tuya_ble English translations](https://github.com/markusg1234/ha_tuya_ble/blob/main/custom_components/tuya_ble/translations/en.json): compared entity labels and states with their corresponding strings.json files on 2026-09-13. All three use Battery for both the percentage sensor and the binary battery condition.
+- [Home Assistant binary sensor device classes](https://www.home-assistant.io/integrations/binary_sensor/#device-class): battery on means low and off means normal; battery_charging on means charging and off means not charging.
+- [Home Assistant backend localization](https://developers.home-assistant.io/docs/internationalization/core/): translation references in source strings and entity/state translation structure. Display labels were also checked against this repository's actual entity keys and option values.

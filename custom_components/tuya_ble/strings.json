@@ -113,11 +113,14 @@
     "button": {
       "push": {
         "name": "Push"
+      },
+      "bright_lid_screen": {
+        "name": "Activate lid display"
       }
     },
     "number": {
       "brightness": {
-        "name": "[%key:component::light::entity_component::_::state_attributes::brightness::name%]"
+        "name": "Brightness"
       },
       "carbon_dioxide_alarm_level": {
         "name": "Alarm level"
@@ -151,6 +154,9 @@
       },
       "countdown_duration_z2": {
         "name": "Irrigation duration - Zone 2"
+      },
+      "temperature_calibration": {
+        "name": "Temperature calibration"
       }
     },
     "select": {
@@ -159,7 +165,7 @@
         "state": {
           "program": "Program",
           "push": "Push",
-          "switch": "[%key:component::switch::entity_component::_::name%]"
+          "switch": "Switch"
         }
       },
       "temperature_unit": {
@@ -169,40 +175,65 @@
         "name": "Reminder mode",
         "state": {
           "interval_reminder": "Interval",
-          "schedule_reminder": "Schedule"
+          "schedule_reminder": "Schedule",
+          "alarm_reminder": "Alarm"
         }
       },
       "beep_volume": {
-        "name": "Lock Volume"
+        "name": "Lock Volume",
+        "state": {
+          "mute": "Muted",
+          "low": "Low",
+          "normal": "Normal",
+          "high": "High"
+        }
+      },
+      "led_brightness": {
+        "name": "LED brightness",
+        "state": {
+          "high": "High",
+          "mid": "Medium",
+          "low": "Low"
+        }
+      },
+      "screen_orientation": {
+        "name": "Screen orientation",
+        "state": {
+          "up": "Up",
+          "down": "Down"
+        }
       }
     },
     "binary_sensor": {
       "low_battery": {
-        "name": "[%key:component::sensor::entity_component::battery::name%]"
+        "name": "Battery"
+      },
+      "battery": {
+        "name": "Battery"
       }
     },
     "sensor": {
       "battery": {
-        "name": "[%key:component::sensor::entity_component::battery::name%]"
+        "name": "Battery"
       },
       "battery_charging": {
         "name": "Battery charging",
         "state": {
           "charged": "Charged",
-          "charging": "[%key:component::binary_sensor::entity_component::battery_charging::state::on%]",
-          "not_charging": "[%key:component::binary_sensor::entity_component::battery_charging::state::off%]"
+          "charging": "Charging",
+          "not_charging": "Not charging"
         }
       },
       "battery_state": {
         "name": "Battery state",
         "state": {
           "high": "High",
-          "low": "[%key:component::binary_sensor::entity_component::battery::state::on%]",
-          "normal": "[%key:component::binary_sensor::entity_component::battery::state::off%]"
+          "low": "Low",
+          "normal": "Normal"
         }
       },
       "carbon_dioxide": {
-        "name": "[%key:component::sensor::entity_component::carbon_dioxide::name%]"
+        "name": "Carbon dioxide"
       },
       "carbon_dioxide_alarm": {
         "name": "Carbon dioxide level",
@@ -212,16 +243,16 @@
         }
       },
       "humidity": {
-        "name": "[%key:component::sensor::entity_component::humidity::name%]"
+        "name": "Humidity"
       },
       "moisture": {
-        "name": "[%key:component::sensor::entity_component::moisture::name%]"
+        "name": "Moisture"
       },
       "signal_strength": {
-        "name": "[%key:component::sensor::entity_component::signal_strength::name%]"
+        "name": "Signal strength"
       },
       "temperature": {
-        "name": "[%key:component::sensor::entity_component::temperature::name%]"
+        "name": "Temperature"
       },
       "water_intake": {
         "name": "Water intake"
@@ -230,7 +261,12 @@
         "name": "Battery"
       },
       "alarm_lock": {
-        "name": "Alarm"
+        "name": "Alarm",
+        "state": {
+          "wrong_finger": "Unrecognized fingerprint",
+          "wrong_password": "Incorrect password",
+          "low_battery": "Low battery"
+        }
       },
       "wrong_finger": {
         "name": "Wrong Fingerprint"
@@ -249,6 +285,34 @@
       },
       "use_time_z2": {
         "name": "Last irrigation time - Zone 2"
+      },
+      "temp_current": {
+        "name": "Temperature"
+      },
+      "battery_percentage": {
+        "name": "Battery"
+      },
+      "motor_thrust_state": {
+        "name": "Motor thrust",
+        "state": {
+          "strong": "Strong",
+          "middle": "Medium",
+          "weak": "Weak"
+        }
+      },
+      "window_state": {
+        "name": "Window state",
+        "state": {
+          "closed": "Closed",
+          "opened": "Open"
+        }
+      },
+      "work_state": {
+        "name": "Work state",
+        "state": {
+          "closed": "Closed",
+          "opened": "Open"
+        }
       }
     },
     "switch": {
@@ -292,7 +356,7 @@
         "name": "Reverse positions"
       },
       "switch": {
-        "name": "[%key:component::switch::entity_component::_::name%]"
+        "name": "Switch"
       },
       "lock_motor_state": {
         "name": "Motor State"
